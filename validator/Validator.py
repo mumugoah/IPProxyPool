@@ -212,6 +212,53 @@ def getMyIP():
         raise Test_URL_Fail
 
 
+
+
+def com58_check(selfip, proxies):
+    '''
+    用来检测代理的类型，突然发现，免费网站写的信息不靠谱，还是要自己检测代理的类型
+    :param
+    :return:
+    '''
+    protocol = -1
+    types = -1
+    speed = -1
+    # try:
+    #     #http://ip.chinaz.com/getip.aspx挺稳定，可以用来检测ip
+    #     r = requests.get(url=config.TEST_URL, headers=config.get_header(), timeout=config.TIMEOUT,
+    #                      proxies=proxies)
+    #     r.encoding = chardet.detect(r.content)['encoding']
+    #     if r.ok:
+    #         if r.text.find(selfip)>0:
+    #             return protocol, types, speed
+    #     else:
+    #         return protocol,types,speed
+    #
+    #
+    # except Exception as e:
+    #     return protocol, types, speed
+    try:
+        start = time.time()
+        r = requests.get(url='http://www.58.com', headers=config.get_header(), timeout=config.TIMEOUT, proxies=proxies)
+        r.encoding = chardet.detect(r.content)['encoding']
+        if r.ok:
+            speed = round(time.time() - start, 2)
+            protocol= 0
+            types=0
+
+        else:
+            speed = -1
+            protocol= -1
+            types=-1
+    except Exception as e:
+            speed = -1
+            protocol = -1
+            types = -1
+    return protocol, types, speed
+
+
+
+
 if __name__ == '__main__':
     ip = '222.186.161.132'
     port = 3128
@@ -222,3 +269,5 @@ if __name__ == '__main__':
     # j = json.dumps(str)
     # str = j['ip']
     # print str
+
+

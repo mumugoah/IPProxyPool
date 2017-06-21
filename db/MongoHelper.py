@@ -9,7 +9,7 @@ class MongoHelper(ISqlHelper):
         self.client = pymongo.MongoClient(DB_CONFIG['DB_CONNECT_STRING'], connect=False)
 
     def init_db(self):
-        self.db = self.client.proxy
+        self.db = self.client[DB_CONFIG['DB_DABASE']]
         self.proxys = self.db.proxys
 
     def drop_db(self):
@@ -45,6 +45,8 @@ class MongoHelper(ISqlHelper):
         if conditions:
             conditions = dict(conditions)
             conditions_name = ['types', 'protocol']
+            if conditions.has_key('count'):
+                conditions.pop('count')
             for condition_name in conditions_name:
                 value = conditions.get(condition_name, None)
                 if value:

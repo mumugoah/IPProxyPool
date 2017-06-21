@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿# IPProxyPool
 IPProxyPool代理池项目，提供代理ip。支持py2和py3两个版本。
 ### 我的新书[《Python爬虫开发与项目实战》](https://item.jd.com/12206762.html)出版了,喜欢的话可以看一下[样章](http://pan.baidu.com/s/1hrWEOYg)
@@ -370,3 +371,6 @@ CHECK_PROXY={'function':'baidu_check'}
 <br/>
 1.修复bug ,将数据库进行压缩
 <br/>
+=======
+# proxies_pool
+>>>>>>> 58f4009ba5195c5021976f6eec7ebaaa5c61dea3

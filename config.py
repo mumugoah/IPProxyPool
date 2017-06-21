@@ -99,17 +99,24 @@ parserList = [
 '''
 数据库的配置
 '''
-DB_CONFIG = {
+# DB_CONFIG = {
+#
+#     'DB_CONNECT_TYPE': 'sqlalchemy',  # 'pymongo'sqlalchemy;redis
+#     # 'DB_CONNECT_STRING':'mongodb://localhost:27017/'
+#     'DB_CONNECT_STRING': 'sqlite:///' + os.path.dirname(__file__) + '/data/proxy.db'
+#     # DB_CONNECT_STRING : 'mysql+mysqldb://root:root@localhost/proxy?charset=utf8'
+#
+#     # 'DB_CONNECT_TYPE': 'redis',  # 'pymongo'sqlalchemy;redis
+#     # 'DB_CONNECT_STRING': 'redis://localhost:6379/8',
+#
+# }
 
-    'DB_CONNECT_TYPE': 'sqlalchemy',  # 'pymongo'sqlalchemy;redis
-    # 'DB_CONNECT_STRING':'mongodb://localhost:27017/'
-    'DB_CONNECT_STRING': 'sqlite:///' + os.path.dirname(__file__) + '/data/proxy.db'
-    # DB_CONNECT_STRING : 'mysql+mysqldb://root:root@localhost/proxy?charset=utf8'
+DB_CONFIG={
+            'DB_CONNECT_TYPE':'pymongo',
+            'DB_CONNECT_STRING':'mongodb://localhost:27017/',
+            'DB_DABASE':'new_proxy'
+        }
 
-    # 'DB_CONNECT_TYPE': 'redis',  # 'pymongo'sqlalchemy;redis
-    # 'DB_CONNECT_STRING': 'redis://localhost:6379/8',
-
-}
 CHINA_AREA = ['河北', '山东', '辽宁', '黑龙江', '吉林'
     , '甘肃', '青海', '河南', '江苏', '湖北', '湖南',
               '江西', '浙江', '广东', '云南', '福建',
@@ -123,7 +130,7 @@ API_PORT = 8000
 不需要检测ip是否已经存在，因为会定时清理
 '''
 UPDATE_TIME = 30 * 60  # 每半个小时检测一次是否有代理ip失效
-MINNUM = 50  # 当有效的ip值小于一个时 需要启动爬虫进行爬取
+MINNUM = 500  # 当有效的ip值小于一个时 需要启动爬虫进行爬取
 
 TIMEOUT = 5  # socket延时
 '''
@@ -196,12 +203,12 @@ TEST_HTTPS_HEADER = 'https://httpbin.org/get'
 #因此在这个地方用户可以自己添加检测函数,我以百度为访问网址尝试一下
 #大家可以看一下Validator.py文件中的baidu_check函数和detect_proxy函数就会明白
 
-CHECK_PROXY={'function':'checkProxy'}#{'function':'baidu_check'}
+CHECK_PROXY={'function':'com58_check',}#{'function':'baidu_check'}
 
 #下面配置squid,现在还没实现
 #SQUID={'path':None,'confpath':'C:/squid/etc/squid.conf'}
 
-MAX_CHECK_PROCESS = 2 # CHECK_PROXY最大进程数
+MAX_CHECK_PROCESS = 4 # CHECK_PROXY最大进程数
 MAX_CHECK_CONCURRENT_PER_PROCESS = 30 # CHECK_PROXY时每个进程的最大并发
 TASK_QUEUE_SIZE = 50 # 任务队列SIZE
 MAX_DOWNLOAD_CONCURRENT = 3 # 从免费代理网站下载时的最大并发 

@@ -60,6 +60,7 @@ class Html_Parser(object):
                 addr = self.ips.getIpAddr(self.ips.str2ip(ip))
                 country = text_('')
                 area = text_('')
+
                 if text_('省') in addr or self.AuthCountry(addr):
                     country = text_('国内')
                     area = addr
